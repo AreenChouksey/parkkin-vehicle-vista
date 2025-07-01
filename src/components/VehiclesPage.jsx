@@ -9,54 +9,42 @@ const VehiclesPage = () => {
       name: 'Cars',
       icon: '🚗',
       description: 'Standard parking spaces for sedans, hatchbacks, and SUVs',
-      features: ['Compact & Mid-size', 'SUVs & Crossovers', 'Electric Vehicles', 'Luxury Cars'],
-      slotSize: '2.5m x 5m',
-      hourlyRate: '$3.00'
+      features: ['Compact & Mid-size', 'SUVs & Crossovers', 'Electric Vehicles', 'Luxury Cars']
     },
     {
       id: 2,
       name: 'Motorcycles',
       icon: '🏍️',
       description: 'Dedicated spaces for motorcycles and scooters',
-      features: ['Sports Bikes', 'Cruisers', 'Scooters', 'Electric Bikes'],
-      slotSize: '1.2m x 2.5m',
-      hourlyRate: '$1.50'
+      features: ['Sports Bikes', 'Cruisers', 'Scooters', 'Electric Bikes']
     },
     {
       id: 3,
       name: 'Bicycles',
       icon: '🚴',
       description: 'Secure bicycle parking with lock facilities',
-      features: ['Mountain Bikes', 'Road Bikes', 'Electric Bikes', 'Folding Bikes'],
-      slotSize: '0.6m x 2m',
-      hourlyRate: '$0.50'
+      features: ['Mountain Bikes', 'Road Bikes', 'Electric Bikes', 'Folding Bikes']
     },
     {
       id: 4,
       name: 'Buses',
       icon: '🚌',
       description: 'Large parking areas for buses and coaches',
-      features: ['City Buses', 'Tourist Coaches', 'School Buses', 'Mini Buses'],
-      slotSize: '3m x 12m',
-      hourlyRate: '$8.00'
+      features: ['City Buses', 'Tourist Coaches', 'School Buses', 'Mini Buses']
     },
     {
       id: 5,
       name: 'Trucks',
       icon: '🚛',
       description: 'Commercial parking for trucks and cargo vehicles',
-      features: ['Delivery Trucks', 'Semi-Trailers', 'Pickup Trucks', 'Cargo Vans'],
-      slotSize: '3.5m x 15m',
-      hourlyRate: '$10.00'
+      features: ['Delivery Trucks', 'Semi-Trailers', 'Pickup Trucks', 'Cargo Vans']
     },
     {
       id: 6,
       name: 'Vans',
       icon: '🚐',
       description: 'Medium-sized parking for vans and mini-buses',
-      features: ['Cargo Vans', 'Passenger Vans', 'Minivans', 'Camper Vans'],
-      slotSize: '2.2m x 6m',
-      hourlyRate: '$4.50'
+      features: ['Cargo Vans', 'Passenger Vans', 'Minivans', 'Camper Vans']
     }
   ];
 
@@ -121,10 +109,6 @@ const VehiclesPage = () => {
             </p>
             <div className="hero-stats">
               <div className="stat">
-                <div className="stat-number">500+</div>
-                <div className="stat-label">Parking Slots</div>
-              </div>
-              <div className="stat">
                 <div className="stat-number">6</div>
                 <div className="stat-label">Vehicle Types</div>
               </div>
@@ -185,16 +169,6 @@ const VehiclesPage = () => {
                   {vehicle.features.map((feature, index) => (
                     <span key={index} className="feature-tag">{feature}</span>
                   ))}
-                </div>
-                <div className="vehicle-details">
-                  <div className="detail-item">
-                    <span className="detail-label">Slot Size:</span>
-                    <span className="detail-value">{vehicle.slotSize}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Rate:</span>
-                    <span className="detail-value">{vehicle.hourlyRate}/hr</span>
-                  </div>
                 </div>
                 <button className="book-btn">
                   <span>Book Slot</span>
