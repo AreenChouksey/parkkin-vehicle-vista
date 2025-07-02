@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './VehiclesPage.css';
 
 const VehiclesPage = () => {
@@ -136,10 +135,10 @@ const VehiclesPage = () => {
               <h1 className="brand-name">At Parkkin</h1>
             </div>
             <nav className="nav">
-              <Link to="/" className="nav-link">Home</Link>
-              <Link to="/services" className="nav-link">Services</Link>
-              <Link to="/vehicles" className="nav-link active">Vehicles</Link>
-              <Link to="/contact" className="nav-link">Contact</Link>
+              <a href="#home" className="nav-link">Home</a>
+              <a href="#services" className="nav-link">Services</a>
+              <a href="#vehicles" className="nav-link active">Vehicles</a>
+              <a href="#contact" className="nav-link">Contact</a>
             </nav>
           </div>
         </div>
