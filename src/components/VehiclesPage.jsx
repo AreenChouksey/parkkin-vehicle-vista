@@ -1,8 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import './VehiclesPage.css';
 
 const VehiclesPage = () => {
+  const [showBookingForm, setShowBookingForm] = useState(null);
+  const [bookingData, setBookingData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    vehicleNumber: '',
+    date: '',
+    time: '',
+    duration: '1'
+  });
+
   const vehicleTypes = [
     {
       id: 1,
@@ -70,6 +81,45 @@ const VehiclesPage = () => {
       icon: '🔒'
     }
   ];
+
+  const handleBookingClick = (vehicleId) => {
+    setShowBookingForm(vehicleId);
+  };
+
+  const handleFormChange = (e) => {
+    setBookingData({
+      ...bookingData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleFormSubmit = (e, vehicleType) => {
+    e.preventDefault();
+    alert(`Booking request submitted for ${vehicleType}!\nName: ${bookingData.name}\nVehicle: ${bookingData.vehicleNumber}\nDate: ${bookingData.date}\nTime: ${bookingData.time}\nDuration: ${bookingData.duration} hours`);
+    setShowBookingForm(null);
+    setBookingData({
+      name: '',
+      email: '',
+      phone: '',
+      vehicleNumber: '',
+      date: '',
+      time: '',
+      duration: '1'
+    });
+  };
+
+  const closeBookingForm = () => {
+    setShowBookingForm(null);
+    setBookingData({
+      name: '',
+      email: '',
+      phone: '',
+      vehicleNumber: '',
+      date: '',
+      time: '',
+      duration: '1'
+    });
+  };
 
   return (
     <div className="vehicles-page">
@@ -170,10 +220,124 @@ const VehiclesPage = () => {
                     <span key={index} className="feature-tag">{feature}</span>
                   ))}
                 </div>
-                <button className="book-btn">
-                  <span>Book Slot</span>
-                  <span className="btn-arrow">→</span>
-                </button>
+                
+                {showBookingForm === vehicle.id ? (
+                  <div className="booking-form-overlay">
+                    <form className="booking-form" onSubmit={(e) => handleFormSubmit(e, vehicle.name)}>
+                      <div className="form-header">
+                        <h4>Book {vehicle.name} Parking</h4>
+                        <button type="button" className="close-btn" onClick={closeBookingForm}>×</button>
+                      </div>
+                      
+                      <div className="form-group">
+                        <label htmlFor="name">Full Name</label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={bookingData.name}
+                          onChange={handleFormChange}
+                          required
+                        />
+                      </div>
+                      
+                      <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={bookingData.email}
+                          onChange={handleFormChange}
+                          required
+                        />
+                      </div>
+                      
+                      <div className="form-group">
+                        <label htmlFor="phone">Phone Number</label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={bookingData.phone}
+                          onChange={handleFormChange}
+                          required
+                        />
+                      </div>
+                      
+                      <div className="form-group">
+                        <label htmlFor="vehicleNumber">Vehicle Number</label>
+                        <input
+                          type="text"
+                          id="vehicleNumber"
+                          name="vehicleNumber"
+                          value={bookingData.vehicleNumber}
+                          onChange={handleFormChange}
+                          placeholder="e.g., ABC-1234"
+                          required
+                        />
+                      </div>
+                      
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label htmlFor="date">Date</label>
+                          <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            value={bookingData.date}
+                            onChange={handleFormChange}
+                            required
+                          />
+                        </div>
+                        
+                        <div className="form-group">
+                          <label htmlFor="time">Time</label>
+                          <input
+                            type="time"
+                            id="time"
+                            name="time"
+                            value={bookingData.time}
+                            onChange={handleFormChange}
+                            required
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="form-group">
+                        <label htmlFor="duration">Duration (hours)</label>
+                        <select
+                          id="duration"
+                          name="duration"
+                          value={bookingData.duration}
+                          onChange={handleFormChange}
+                          required
+                        >
+                          <option value="1">1 hour</option>
+                          <option value="2">2 hours</option>
+                          <option value="4">4 hours</option>
+                          <option value="8">8 hours</option>
+                          <option value="12">12 hours</option>
+                          <option value="24">24 hours</option>
+                        </select>
+                      </div>
+                      
+                      <div className="form-actions">
+                        <button type="button" className="cancel-btn" onClick={closeBookingForm}>
+                          Cancel
+                        </button>
+                        <button type="submit" className="submit-btn">
+                          Book Now
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                ) : (
+                  <button className="book-btn" onClick={() => handleBookingClick(vehicle.id)}>
+                    <span>Book Slot</span>
+                    <span className="btn-arrow">→</span>
+                  </button>
+                )}
               </div>
             ))}
           </div>
