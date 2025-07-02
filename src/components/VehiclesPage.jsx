@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './VehiclesPage.css';
 
@@ -222,115 +221,140 @@ const VehiclesPage = () => {
                 </div>
                 
                 {showBookingForm === vehicle.id ? (
-                  <div className="booking-form-overlay">
-                    <form className="booking-form" onSubmit={(e) => handleFormSubmit(e, vehicle.name)}>
-                      <div className="form-header">
-                        <h4>Book {vehicle.name} Parking</h4>
-                        <button type="button" className="close-btn" onClick={closeBookingForm}>×</button>
+                  <div className="booking-form-container">
+                    <div className="booking-form-overlay">
+                      <div className="booking-form-wrapper">
+                        <form className="booking-form" onSubmit={(e) => handleFormSubmit(e, vehicle.name)}>
+                          <div className="form-header">
+                            <h3 className="form-title">Book {vehicle.name} Parking</h3>
+                            <button type="button" className="close-btn" onClick={closeBookingForm}>×</button>
+                          </div>
+                          
+                          <div className="form-content">
+                            <div className="form-section">
+                              <h4 className="section-title">Personal Information</h4>
+                              <div className="form-group">
+                                <label htmlFor="name" className="form-label">Full Name *</label>
+                                <input
+                                  type="text"
+                                  id="name"
+                                  name="name"
+                                  className="form-input"
+                                  value={bookingData.name}
+                                  onChange={handleFormChange}
+                                  placeholder="Enter your full name"
+                                  required
+                                />
+                              </div>
+                              
+                              <div className="form-row">
+                                <div className="form-group">
+                                  <label htmlFor="email" className="form-label">Email Address *</label>
+                                  <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    className="form-input"
+                                    value={bookingData.email}
+                                    onChange={handleFormChange}
+                                    placeholder="your.email@example.com"
+                                    required
+                                  />
+                                </div>
+                                
+                                <div className="form-group">
+                                  <label htmlFor="phone" className="form-label">Phone Number *</label>
+                                  <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    className="form-input"
+                                    value={bookingData.phone}
+                                    onChange={handleFormChange}
+                                    placeholder="+1 (555) 123-4567"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="form-section">
+                              <h4 className="section-title">Vehicle & Booking Details</h4>
+                              <div className="form-group">
+                                <label htmlFor="vehicleNumber" className="form-label">Vehicle Number *</label>
+                                <input
+                                  type="text"
+                                  id="vehicleNumber"
+                                  name="vehicleNumber"
+                                  className="form-input"
+                                  value={bookingData.vehicleNumber}
+                                  onChange={handleFormChange}
+                                  placeholder="e.g., ABC-1234"
+                                  required
+                                />
+                              </div>
+                              
+                              <div className="form-row">
+                                <div className="form-group">
+                                  <label htmlFor="date" className="form-label">Parking Date *</label>
+                                  <input
+                                    type="date"
+                                    id="date"
+                                    name="date"
+                                    className="form-input"
+                                    value={bookingData.date}
+                                    onChange={handleFormChange}
+                                    required
+                                  />
+                                </div>
+                                
+                                <div className="form-group">
+                                  <label htmlFor="time" className="form-label">Arrival Time *</label>
+                                  <input
+                                    type="time"
+                                    id="time"
+                                    name="time"
+                                    className="form-input"
+                                    value={bookingData.time}
+                                    onChange={handleFormChange}
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div className="form-group">
+                                <label htmlFor="duration" className="form-label">Duration *</label>
+                                <select
+                                  id="duration"
+                                  name="duration"
+                                  className="form-select"
+                                  value={bookingData.duration}
+                                  onChange={handleFormChange}
+                                  required
+                                >
+                                  <option value="1">1 hour</option>
+                                  <option value="2">2 hours</option>
+                                  <option value="4">4 hours</option>
+                                  <option value="8">8 hours</option>
+                                  <option value="12">12 hours</option>
+                                  <option value="24">24 hours</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="form-actions">
+                            <button type="button" className="cancel-btn" onClick={closeBookingForm}>
+                              Cancel
+                            </button>
+                            <button type="submit" className="submit-btn">
+                              <span>Confirm Booking</span>
+                              <span className="btn-icon">→</span>
+                            </button>
+                          </div>
+                        </form>
                       </div>
-                      
-                      <div className="form-group">
-                        <label htmlFor="name">Full Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={bookingData.name}
-                          onChange={handleFormChange}
-                          required
-                        />
-                      </div>
-                      
-                      <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={bookingData.email}
-                          onChange={handleFormChange}
-                          required
-                        />
-                      </div>
-                      
-                      <div className="form-group">
-                        <label htmlFor="phone">Phone Number</label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={bookingData.phone}
-                          onChange={handleFormChange}
-                          required
-                        />
-                      </div>
-                      
-                      <div className="form-group">
-                        <label htmlFor="vehicleNumber">Vehicle Number</label>
-                        <input
-                          type="text"
-                          id="vehicleNumber"
-                          name="vehicleNumber"
-                          value={bookingData.vehicleNumber}
-                          onChange={handleFormChange}
-                          placeholder="e.g., ABC-1234"
-                          required
-                        />
-                      </div>
-                      
-                      <div className="form-row">
-                        <div className="form-group">
-                          <label htmlFor="date">Date</label>
-                          <input
-                            type="date"
-                            id="date"
-                            name="date"
-                            value={bookingData.date}
-                            onChange={handleFormChange}
-                            required
-                          />
-                        </div>
-                        
-                        <div className="form-group">
-                          <label htmlFor="time">Time</label>
-                          <input
-                            type="time"
-                            id="time"
-                            name="time"
-                            value={bookingData.time}
-                            onChange={handleFormChange}
-                            required
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="form-group">
-                        <label htmlFor="duration">Duration (hours)</label>
-                        <select
-                          id="duration"
-                          name="duration"
-                          value={bookingData.duration}
-                          onChange={handleFormChange}
-                          required
-                        >
-                          <option value="1">1 hour</option>
-                          <option value="2">2 hours</option>
-                          <option value="4">4 hours</option>
-                          <option value="8">8 hours</option>
-                          <option value="12">12 hours</option>
-                          <option value="24">24 hours</option>
-                        </select>
-                      </div>
-                      
-                      <div className="form-actions">
-                        <button type="button" className="cancel-btn" onClick={closeBookingForm}>
-                          Cancel
-                        </button>
-                        <button type="submit" className="submit-btn">
-                          Book Now
-                        </button>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                 ) : (
                   <button className="book-btn" onClick={() => handleBookingClick(vehicle.id)}>
